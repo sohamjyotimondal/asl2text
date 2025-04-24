@@ -69,7 +69,42 @@ The model is trained on TensorFlow and converted to TensorFlow Lite for efficien
 
 
 ---
+flowchart TD
+    A[Input: Frames batch, INPUT_SIZE, N_COLS, N_DIMS] --> B[Landmark Slicing & Preprocessing]
+    B --> C1[Lips Landmarks 40,2]
+    B --> C2[Left Hand Landmarks 21,2]
+    B --> C3[Pose Landmarks 5,2]
 
+    %% Landmark Embeddings
+    C1 --> D1[Lips MLP Embedding Dense -> GELU -> Dense]
+    C2 --> D2[Left Hand MLP Embedding Dense -> GELU -> Dense]
+    C3 --> D3[Pose MLP Embedding Dense -> GELU -> Dense]
+
+    %% Masking for empty landmarks
+    D1 --> E1[Empty Embedding if missing]
+    D2 --> E2[Empty Embedding if missing]
+    D3 --> E3[Empty Embedding if missing]
+
+    E1 --> F
+    E2 --> F
+    E3 --> F
+
+    %% Stack and weighted combine
+    F[Stack Embeddings Lips, Left Hand, Pose -> Weighted by softmax] --> G[Sum & FC Layer Dense -> GELU -> Dense]
+    
+    %% Positional Encoding
+    G --> H[Add Positional Embedding]
+    
+    %% Transformer Encoder
+    H --> I1[Transformer Block 1]
+    I1 --> I2[Transformer Block 2]
+    I2 --> J[Sequence Output (batch, INPUT_SIZE, UNITS)]
+    
+    %% Pooling, Dropout, Classification
+    J --> K[Mean Pooling (mask-aware)]
+    K --> L[Dropout]
+    L --> M[Dense Softmax (NUM_CLASSES)]
+    M --> N[Predicted Sign Class]
 ## References
 
 - [Kaggle ASL Signs Competition](https://www.kaggle.com/competitions/asl-signs)

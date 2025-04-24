@@ -24,7 +24,7 @@ PI_STREAM_URL = f"http://{PI_IP_ADDRESS}:{PI_STREAM_PORT}/video_feed"
 LAPTOP_FLASK_PORT = 5001 # Port this laptop server runs on
 
 # --- Copied Config/Inits (Model, Gemini, Signs) ---
-GOOGLE_API_KEY = "AIzaSyD2yKNUkzYqNobXA-ACKvEGkyap1dSPOYs" # Replace if needed
+GOOGLE_API_KEY = "" # Replace if needed
 if not GOOGLE_API_KEY: print("Laptop Warning: Google API Key not found.")
 
 MODEL_PATH = "model.tflite"

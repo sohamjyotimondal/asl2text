@@ -21,7 +21,7 @@ app = Flask(__name__)
 # load_dotenv() # Uncomment if you use a .env file
 # GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 # WARNING: Hardcoding keys is insecure. Use environment variables for production.
-GOOGLE_API_KEY = "AIzaSyDb6lcp_v7kp3ZZp1s16z89X6JP6Y_QL-0"  # Replace with your actual key or load safely
+GOOGLE_API_KEY = ""  # Replace with your actual key or load safely
 if not GOOGLE_API_KEY:
     print("Warning: Google API Key not found. Sentence generation disabled.")
 

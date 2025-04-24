@@ -20,7 +20,7 @@ LISTENING_PORT = 9999     # Port the Pi connects to for landmarks
 FLASK_PORT = 5001         # Port for the status API server (must match Pi's JS)
 
 # --- Copied Config/Inits from original App (Needed for Inference/API/TTS) ---
-GOOGLE_API_KEY = "AIzaSyD2yKNUkzYqNobXA-ACKvEGkyap1dSPOYs" # Replace if needed
+GOOGLE_API_KEY = "" # Replace if needed
 if not GOOGLE_API_KEY: print("Laptop Warning: Google API Key not found.")
 
 MODEL_PATH = "model.tflite" # Needs model.tflite on laptop
